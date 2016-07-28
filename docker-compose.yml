@@ -1,0 +1,17 @@
+version: '2'
+services:
+    ui:
+        build:
+            context: .
+        image: tbeadle/spelling/ui:0.1
+        environment:
+            DB_PATH: /var/lib/sqlite/db.sqlite3
+            MOD_WSGI_RELOAD_ON_CHANGES: 1
+            # PROD: 1
+        command: "proj/wsgi.py --url-alias /static /static"
+        ports:
+            - "80:80"
+        volumes:
+            - .:/app
+            - /var/lib/spelling:/var/lib/sqlite
+# vim: expandtab ts=4 st=4
